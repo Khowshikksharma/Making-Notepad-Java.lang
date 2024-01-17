@@ -1,0 +1,151 @@
+package PRJT_26;
+import java.awt.*; 
+import javax.swing.*;  
+import java.io.*;  
+import java.awt.event.*;  
+import javax.swing.plaf.metal.*;  
+import javax.swing.text.*; 
+public class M3_NOTES extends JFrame implements ActionListener {
+	
+	JFrame f = new JFrame("Notes");
+    JTextArea t = new JTextArea();
+    Font fnt =new Font("Arial",Font.PLAIN,15);
+	Container con=new Container();
+	JScrollPane sbr=new JScrollPane(t,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	
+    M3_NOTES()
+    {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+            MetalLookAndFeel.setCurrentTheme(new OceanTheme());
+        }
+        catch (Exception e) {
+        }
+        
+        f.setLocation(new Point(300,100));
+        f.setSize(new Dimension(900,600));
+        t.setFont(fnt);
+		t.setLineWrap(true);
+		t.setWrapStyleWord(true);
+        t.setVisible(true);
+        f.add(sbr);
+        
+        JMenuBar mb = new JMenuBar();
+        JMenu m1 = new JMenu("File");
+        JMenuItem mi1 = new JMenuItem("New");
+        JMenuItem mi2 = new JMenuItem("Open");
+        JMenuItem mi3 = new JMenuItem("Save");
+        JMenuItem mi9 = new JMenuItem("Print");
+        mi1.addActionListener(this);
+        mi2.addActionListener(this);
+        mi3.addActionListener(this);
+        mi9.addActionListener(this);
+        m1.add(mi1);
+        m1.add(mi2);
+        m1.add(mi3);
+        m1.addSeparator();
+        m1.add(mi9);
+        JMenu m2 = new JMenu("Edit");
+        JMenuItem mi4 = new JMenuItem("Cut");
+        JMenuItem mi5 = new JMenuItem("Copy");
+        JMenuItem mi6 = new JMenuItem("Paste");
+        mi4.addActionListener(this);
+        mi5.addActionListener(this);
+        mi6.addActionListener(this);
+        m2.add(mi4);
+        m2.add(mi5);
+        m2.add(mi6);
+        JMenu m3 = new JMenu("Help");
+        JMenuItem mh=new JMenuItem("About Notes");
+        JMenuItem mc = new JMenuItem("Close");
+        mh.addActionListener(this);
+        mc.addActionListener(this);
+        m3.add(mh);
+        m3.add(mc);
+        mb.add(m1);
+        mb.add(m2);
+        mb.add(m3);
+        f.setJMenuBar(mb);
+        
+        f.setVisible(true);
+    }
+    
+    public void actionPerformed(ActionEvent e)
+    {
+        String s=e.getActionCommand();
+        if (s.equals("Cut")) {
+            t.cut();
+        }
+        else if (s.equals("Copy")) {
+            t.copy();
+        }
+        else if (s.equals("Paste")) {
+            t.paste();
+        }
+        else if (s.equals("Save")) {
+            JFileChooser j = new JFileChooser("f:");
+            int r=j.showSaveDialog(null);
+            if (r==JFileChooser.APPROVE_OPTION) {
+                File fi =new File(j.getSelectedFile().getAbsolutePath());
+                try {
+                    FileWriter wr=new FileWriter(fi,false);
+                    BufferedWriter w=new BufferedWriter(wr);
+                    w.write(t.getText());
+                    w.flush();
+                    w.close();
+                }
+                catch (Exception evt) {
+                	JOptionPane.showMessageDialog(f, "The following operation is disabled");
+                }
+            }
+            else
+            	JOptionPane.showMessageDialog(f, "The following operation is cancelled");
+        }
+        else if (s.equals("Print")) {
+            try {
+                t.print();
+            }
+            catch (Exception evt) {
+            	JOptionPane.showMessageDialog(f, "The following operation is disabled");
+            }
+        }
+        else if (s.equals("Open")) {
+            JFileChooser j = new JFileChooser("f:");
+            int r=j.showOpenDialog(null);
+            if (r==JFileChooser.APPROVE_OPTION) {
+                File fi = new File(j.getSelectedFile().getAbsolutePath());
+ 
+                try {
+                    String s1="",s2="";
+                    FileReader fr=new FileReader(fi);
+                    BufferedReader br=new BufferedReader(fr);
+                    s2=br.readLine();
+                    while ((s1=br.readLine())!= null) {
+                        s2=s2+"\n"+s1;
+                    }
+                    t.setText(s2);
+                }
+                catch (Exception evt) {
+                	JOptionPane.showMessageDialog(f, "The following operation is disabled");
+                }
+            }
+            else
+                JOptionPane.showMessageDialog(f, "The following operation is cancelled");
+        }
+        else if (s.equals("New")) {
+            t.setText("");
+        }
+        else if (s.equals("Close")) {
+            f.setVisible(false);
+            JOptionPane.showMessageDialog(f,"Logout Scuccessful");
+        }
+        else if (s.equals("About Notes")) {
+        	JOptionPane.showMessageDialog(f,"Created by : Khowshikk Sharma");
+        }
+    }
+    
+    public static void main(String args[])
+    {
+        M3_NOTES e = new M3_NOTES();
+    }
+}
