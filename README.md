@@ -62,3 +62,19 @@ The application’s interface is intuitive, providing a simple navigation experi
 1. Clone the repository to your local machine.
    ```bash
    git clone https://github.com/your-username/notes-application.git
+
+2. Navigate to the project directory and compile the Java files.
+
+   ```bash
+   cd notes-application
+   javac NotesApp.java
+   Run the application.
+
+   ```bash
+   java NotesApp
+   License
+   This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgements
+- Java Swing library for building the user interface.
+- StackOverflow and other online communities for troubleshooting and advice.
