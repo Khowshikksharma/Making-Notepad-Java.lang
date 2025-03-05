@@ -69,11 +69,12 @@ The application’s interface is intuitive, providing a simple navigation experi
    cd notes-application
    javac NotesApp.java
    Run the application.
-
+-
    ```bash
    java NotesApp
-   License
-   This project is licensed under the MIT License - see the LICENSE file for details.
+
+##License
+- This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgements
 - Java Swing library for building the user interface.
