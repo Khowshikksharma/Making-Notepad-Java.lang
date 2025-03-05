@@ -64,7 +64,7 @@ The application’s interface is intuitive, providing a simple navigation experi
    git clone https://github.com/your-username/notes-application.git
 
 2. Navigate to the project directory and compile the Java files.
-
+-
    ```bash
    cd notes-application
    javac NotesApp.java
@@ -73,7 +73,7 @@ The application’s interface is intuitive, providing a simple navigation experi
    ```bash
    java NotesApp
 
-##License
+## License
 - This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgements
